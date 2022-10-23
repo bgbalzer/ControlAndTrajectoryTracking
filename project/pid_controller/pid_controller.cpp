@@ -19,6 +19,12 @@ void PID::Init(double Kpi, double Kii, double Kdi, double output_lim_maxi, doubl
    /**
    * TODO: Initialize PID coefficients (and errors, if needed)
    **/
+   Kp = Kpi;
+   Kd = Kdi;
+   Ki = Kii;
+  
+   output_lim_max = output_lim_maxi;
+   output_lim_min = output_lim_mini;
 }
 
 
@@ -26,6 +32,21 @@ void PID::UpdateError(double cte) {
    /**
    * TODO: Update PID errors based on cte.
    **/
+   
+  //special case for the first update step
+   if (this->cte == NULL) {
+     this->cte = cte;
+   }
+  
+   if (delta_time == 0) {
+     this->diff_cte = 0;
+   }
+  
+   else {
+     this->diff_cte = (cte - this->cte)/delta_time;
+   }
+  
+   
 }
 
 double PID::TotalError() {
