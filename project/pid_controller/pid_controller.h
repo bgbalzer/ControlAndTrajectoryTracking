@@ -17,9 +17,10 @@ public:
     /*
     * Errors
     */
-	double cte;
-	double diff_cte;
-	double sum_cte;
+	double err;
+	double sum_err;
+	double diff_err;
+	
     /*
     * Coefficients
     */
