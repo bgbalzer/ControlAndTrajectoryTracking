@@ -41,7 +41,7 @@ void PID::UpdateError(double cte) {
    }
    
    //then integral term
-   sum_err += (cte - err) * delta_time;
+   sum_err += cte * delta_time;
   
    //finally update error term itself
    err = cte;   
@@ -61,7 +61,7 @@ double PID::TotalError() {
    control = max(control, output_lim_min);
    control = min(control, output_lim_max);
    
-   std::cout << "Cte " << err << " Control: " << control << " P: " << -Kp * err << " I: " << - Ki * sum_err << " D: " << - Kd * diff_err << " T: " << delta_time << std::endl;
+   //std::cout << "Cte " << err << " Control: " << control << " P: " << -Kp * err << " I: " << - Ki * sum_err << " D: " << - Kd * diff_err << " T: " << delta_time << std::endl;
    
    return control;
 }
@@ -71,4 +71,5 @@ double PID::UpdateDeltaTime(double new_delta_time) {
    * TODO: Update the delta time with new value
    */
    delta_time = new_delta_time;
+   return delta_time;
 }
